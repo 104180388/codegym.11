@@ -1,11 +1,409 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mở Hòm Nhân Phẩm 20/11 - Săn Thẻ Bài Mentor SSR | CodeGym</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- html2canvas CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <!-- Custom CSS Tối Ưu Triệt Để -->
+    <link rel="stylesheet" href="style.css?v=2">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            gold: '#f59e0b',
+                            purple: '#a855f7',
+                            blue: '#3b82f6',
+                            red: '#ef4444',
+                            dark: '#070a12'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <h1>Hello wORLD</h1>
+<body class="cyber-grid-bg min-h-screen text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+
+    <!-- === HEADER / THANH ĐIỀU HƯỚNG TỐI ƯU === -->
+    <header class="navbar-container sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand & Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="images/logo.svg" alt="CodeGym 20/11" class="w-10 h-10 object-contain drop-shadow-md">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-[10px] px-2 py-0.5 rounded font-black bg-amber-500/20 text-amber-400 border border-amber-500/30 tracking-wider">
+                            TRI ÂN 20/11
+                        </span>
+                        <span class="text-[11px] text-slate-400 font-medium">CodeGym Special Edition</span>
+                    </div>
+                    <h1 class="text-base sm:text-lg font-black font-gaming bg-gradient-to-r from-amber-400 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
+                        MỞ HÒM NHÂN PHẨM • MENTOR SSR
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Thanh công cụ & Nút chức năng -->
+            <div class="flex items-center flex-wrap gap-2">
+                <!-- Nhập tên học viên -->
+                <div class="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-xl px-2.5 py-1.5 focus-within:border-amber-400 transition-colors">
+                    <span class="text-xs text-slate-400 mr-1.5">👤</span>
+                    <input type="text" id="playerName" value="Dev Tân Binh" placeholder="Tên bạn..." 
+                           class="bg-transparent text-xs font-bold text-amber-300 focus:outline-none w-24 sm:w-32">
+                </div>
+
+                <!-- Bật/Tắt âm thanh -->
+                <button id="muteBtn" class="flex items-center space-x-1 px-3 py-1.5 bg-slate-900 border border-slate-700 hover:border-slate-500 rounded-xl text-xs font-bold text-slate-300 transition-all cursor-pointer" title="Bật/Tắt âm thanh">
+                    <span id="muteIcon">🔊</span> <span class="hidden sm:inline">Âm thanh</span>
+                </button>
+
+                <!-- Kho Thư Viện Thẻ (Gallery) -->
+                <button id="viewGalleryBtn" class="flex items-center space-x-1.5 px-3 py-1.5 bg-blue-950/40 border border-blue-500/40 hover:border-blue-400 rounded-xl text-xs font-bold text-blue-300 transition-all cursor-pointer">
+                    <span>🖼️</span> <span>Kho Thẻ</span>
+                </button>
+
+                <!-- Kho Thẻ Đã Săn -->
+                <button id="viewCollectionBtn" class="flex items-center space-x-1.5 px-3 py-1.5 bg-purple-950/40 border border-purple-500/40 hover:border-purple-400 rounded-xl text-xs font-bold text-purple-300 transition-all cursor-pointer">
+                    <span>🏆</span> <span id="collectionCount">Đã Săn</span>
+                </button>
+
+                <!-- Thêm Thầy Cô Lớp Mình -->
+                <button id="addMentorBtn" class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-500/10 border border-amber-500/40 hover:bg-amber-500/20 rounded-xl text-xs font-bold text-amber-400 transition-all cursor-pointer">
+                    <span>➕</span> <span class="hidden sm:inline">Thêm Mentor</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- === NỘI DUNG CHÍNH (MAIN VIEWPORT) === -->
+    <main class="max-w-6xl mx-auto px-4 py-5 w-full flex-1 flex flex-col items-center justify-center">
+
+        <!-- Banner tiêu đề -->
+        <div class="w-full text-center mb-5">
+            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-slate-900/90 border border-amber-500/30 text-amber-300 text-xs font-bold shadow-md shadow-amber-500/10 mb-2">
+                <span>✨</span>
+                <span>Ngày Nhà Giáo Việt Nam 20/11: Vượt Qua Biển Bug • Rước Mentor Hoàng Kim</span>
+                <span>✨</span>
+            </div>
+            <p class="text-xs text-slate-400 max-w-xl mx-auto">
+                Cơ chế mở hòm FPS cuộn ngang với dải thẻ bài đồ họa, âm thanh cơ khí chuẩn xác và bộ sưu tập Thẻ Giảng viên SSR đỉnh cao kèm lời chúc 20/11!
+            </p>
+        </div>
+
+        <!-- === HÒM QUAY ROULETTE TỐI ƯU LAYOUT (CRATE SHELL) === -->
+        <div class="w-full max-w-4xl relative">
+            <div class="crate-shell">
+
+                <!-- Header viền hòm -->
+                <div class="flex items-center justify-between pb-2.5 mb-2 border-b border-slate-800 text-xs font-mono">
+                    <span class="flex items-center gap-2 text-slate-300 font-bold">
+                        <img src="images/crate.svg" alt="Crate" class="w-5 h-5 object-contain inline-block">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        CODEGYM CRATE #2011
+                    </span>
+                    <span class="text-slate-500 text-[11px] hidden sm:inline">
+                        Laser Needle Tracking • Web Audio Synced
+                    </span>
+                </div>
+
+                <!-- Băng chuyền Roulette -->
+                <div id="rouletteContainer" class="roulette-viewport">
+                    <!-- Kim hồng tâm Laser chính giữa -->
+                    <div class="roulette-needle"></div>
+
+                    <!-- Mờ dần 2 bên mép -->
+                    <div class="roulette-vignette-left"></div>
+                    <div class="roulette-vignette-right"></div>
+
+                    <!-- Dải thẻ bài chuyển động -->
+                    <div id="rouletteTrack" class="flex gap-3 pl-4 items-center">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Footer hòm: Thước đo nhân phẩm & Chế độ chơi -->
+                <div class="mt-3.5 pt-2.5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                    <!-- Thước đo nhân phẩm (Pity Gauge) -->
+                    <div class="w-full sm:w-80 pity-gauge-container">
+                        <div class="flex justify-between items-center mb-1 text-[11px]">
+                            <span class="font-bold text-slate-300 flex items-center gap-1.5">
+                                <span>🛡️</span> Thước đo nhân phẩm:
+                            </span>
+                            <span id="pityCount" class="font-mono font-black text-amber-400">0/15</span>
+                        </div>
+                        <div class="pity-track">
+                            <div id="pityProgress" class="pity-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 mt-1">Đạt 15 lần không ra SSR sẽ bảo hiểm 100% nhận thẻ vàng!</p>
+                    </div>
+
+                    <!-- Chế độ Quay Nhanh & Thầy Cô Độ -->
+                    <div class="flex items-center gap-4 text-xs">
+                        <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white select-none">
+                            <input type="checkbox" id="fastSpinToggle" class="rounded bg-slate-800 border-slate-700 text-amber-500 focus:ring-0">
+                            <span>⚡ Quay Nhanh</span>
+                        </label>
+
+                        <label class="flex items-center gap-1.5 cursor-pointer text-amber-400 hover:text-amber-300 select-none">
+                            <input type="checkbox" id="hackLuckToggle" class="rounded bg-slate-800 border-slate-700 text-amber-500 focus:ring-0">
+                            <span>⭐ Thầy Cô Độ (100% SSR)</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- === NÚT ĐIỀU KHIỂN QUAY (ACTION BUTTONS) === -->
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <!-- Nút Mở 1 Hòm -->
+            <button id="spin1Btn" class="btn-spin-gold px-8 py-3.5 rounded-2xl text-sm sm:text-base font-black flex items-center gap-2.5 tracking-wider">
+                <span class="text-xl">🎰</span>
+                <span>MỞ 1 HÒM</span>
+                <span class="text-[10px] bg-black/20 text-black px-1.5 py-0.5 rounded font-mono font-bold">[Space]</span>
+            </button>
+
+            <!-- Nút Mở 10 Hòm -->
+            <button id="spin10Btn" class="btn-spin-purple px-7 py-3.5 rounded-2xl text-sm sm:text-base font-black flex items-center gap-2.5 tracking-wider">
+                <span class="text-xl">🚀</span>
+                <span>QUAY 10 LẦN</span>
+            </button>
+        </div>
+
+        <!-- === BẢNG TỈ LỆ RƠI VẬT PHẨM (DROP RATES) === -->
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-3xl w-full text-center">
+            <div class="p-2.5 rounded-xl bg-slate-900/70 border border-yellow-500/30">
+                <span class="text-[11px] font-black text-amber-400 uppercase tracking-wider block">SSR (8%)</span>
+                <span class="text-[11px] text-slate-300 font-medium">Giảng Viên Huyền Thoại</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-900/70 border border-purple-500/30">
+                <span class="text-[11px] font-black text-purple-400 uppercase tracking-wider block">SR (22%)</span>
+                <span class="text-[11px] text-slate-300 font-medium">Trợ Thủ Thần Thánh</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-900/70 border border-blue-500/30">
+                <span class="text-[11px] font-black text-blue-400 uppercase tracking-wider block">R (35%)</span>
+                <span class="text-[11px] text-slate-300 font-medium">Công Cụ Cứu Nguy</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-900/70 border border-red-500/30">
+                <span class="text-[11px] font-black text-red-400 uppercase tracking-wider block">Ác Mộng (35%)</span>
+                <span class="text-[11px] text-slate-300 font-medium">Bug, Conflict, NullPointer</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer class="border-t border-slate-800/80 bg-slate-950/80 py-3.5 text-center text-xs text-slate-500">
+        <p>❤️ Thiết kế đặc biệt chào mừng Ngày Nhà Giáo Việt Nam 20/11 • CodeGym Special Gacha</p>
+    </footer>
+
+    <!-- ============================================================== -->
+    <!-- === MODAL POPUP: CHIẾN THẮNG & THẺ BÀI MASTERPIECE (440x640) === -->
+    <!-- ============================================================== -->
+    <div id="winnerModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md hidden transition-all">
+        <div class="winner-dialog-content relative w-full max-w-sm sm:max-w-md p-4 sm:p-5 flex flex-col items-center">
+
+            <!-- Nút đóng nhanh góc trên -->
+            <button id="closeWinnerModalTopBtn" class="absolute top-3 right-4 text-slate-400 hover:text-white text-xl z-20 cursor-pointer">✕</button>
+
+            <!-- Tiêu đề chiến thắng -->
+            <div class="text-center mb-2">
+                <span id="winnerRarityTitle" class="text-xs font-black uppercase tracking-widest text-amber-400">
+                    🎉 CHÚC MỪNG BẠN ĐÃ NHẬN ĐƯỢC!
+                </span>
+            </div>
+
+            <!-- Vùng chụp ảnh (Card Capture Area) -->
+            <div id="cardCaptureArea" class="w-full flex justify-center py-1">
+                <div class="card-presentation-frame w-full">
+                    <img id="winnerCardFullImg" src="images/cards/ssr-bach.svg" alt="Trading Card" 
+                         class="card-3d-img ssr-glow-active">
+                </div>
+            </div>
+
+            <!-- Cụm nút thao tác bên dưới thẻ -->
+            <div class="w-full mt-3.5 flex flex-col gap-2">
+                <div class="grid grid-cols-2 gap-2">
+                    <!-- Nút chụp ảnh PNG -->
+                    <button id="downloadCardBtn" class="px-4 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/25 transition-transform active:scale-95 cursor-pointer">
+                        <span>📸 Chụp Khoe Ngay</span>
+                    </button>
+
+                    <!-- Nút copy lời chúc -->
+                    <button id="copyWishBtn" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-600 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-transform active:scale-95 cursor-pointer">
+                        <span>📋 Copy Lời Chúc</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="downloadSvgBtn" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 rounded-xl font-semibold text-xs flex items-center justify-center gap-1 cursor-pointer">
+                        <span>📥 Tải File SVG</span>
+                    </button>
+                    <button id="spinAgainBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1 cursor-pointer">
+                        <span>🔄 Quay Tiếp</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- === MODAL POPUP: KHO THƯ VIỆN ẢNH THẺ (GALLERY VIEW) === -->
+    <div id="galleryModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="w-full max-w-5xl bg-slate-950 border border-slate-700/80 rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col max-h-[92vh]">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🖼️</span>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black font-gaming text-amber-400">KHO THƯ VIỆN HÌNH ẢNH THẺ BÀI</h3>
+                        <p class="text-xs text-slate-400">Xem và tải toàn bộ 19 thẻ bài đồ họa hoàn chỉnh</p>
+                    </div>
+                </div>
+                <button id="closeGalleryModalBtn" class="text-slate-400 hover:text-white text-xl px-2 cursor-pointer">✕</button>
+            </div>
+
+            <!-- Thanh lọc theo độ hiếm -->
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+                <button class="gallery-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-amber-500 text-black active cursor-pointer" data-filter="ALL">Tất cả (19)</button>
+                <button class="gallery-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-800 text-amber-400 hover:bg-slate-700 cursor-pointer" data-filter="SSR">SSR Giảng Viên (6)</button>
+                <button class="gallery-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-800 text-purple-400 hover:bg-slate-700 cursor-pointer" data-filter="SR">SR Trợ Thủ (4)</button>
+                <button class="gallery-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-800 text-blue-400 hover:bg-slate-700 cursor-pointer" data-filter="R">R Công Cụ (3)</button>
+                <button class="gallery-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-800 text-red-400 hover:bg-slate-700 cursor-pointer" data-filter="COMMON">Common Bug (6)</button>
+            </div>
+
+            <!-- Lưới hình ảnh thẻ bài -->
+            <div id="galleryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 overflow-y-auto py-2 pr-1">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- === MODAL POPUP: KẾT QUẢ MỞ 10 HÒM (MULTI PULL) === -->
+    <div id="multiModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="w-full max-w-3xl bg-slate-950 border border-slate-700/80 rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                <div>
+                    <h3 class="text-base sm:text-lg font-black font-gaming text-amber-400">CHIẾN LỢI PHẨM MỞ 10 HÒM</h3>
+                    <p class="text-xs text-slate-400">Click vào bất kỳ thẻ nào để xem chi tiết và tải ảnh</p>
+                </div>
+                <button id="closeMultiModalBtn" class="text-slate-400 hover:text-white text-xl px-2 cursor-pointer">✕</button>
+            </div>
+
+            <!-- Lưới 10 thẻ -->
+            <div id="multiResultsGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 overflow-y-auto py-2">
+                <!-- Injected by JS -->
+            </div>
+
+            <div class="mt-3.5 pt-3 border-t border-slate-800 flex justify-end">
+                <button onclick="document.getElementById('multiModal').classList.add('hidden')" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs rounded-xl cursor-pointer">
+                    Đã Hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- === MODAL: BỘ SƯU TẬP (COLLECTION) === -->
+    <div id="collectionModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="w-full max-w-4xl bg-slate-950 border border-slate-700/80 rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🏆</span>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black font-gaming text-amber-400">BỘ SƯU TẬP GIẢNG VIÊN SSR ĐÃ SĂN</h3>
+                        <p class="text-xs text-slate-400">Danh sách các Thầy/Cô bạn đã săn thành công vào kho đồ</p>
+                    </div>
+                </div>
+                <button id="closeCollectionModalBtn" class="text-slate-400 hover:text-white text-xl px-2 cursor-pointer">✕</button>
+            </div>
+
+            <div id="collectionGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5 overflow-y-auto py-2">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- === MODAL: THÊM GIẢNG VIÊN CỦA LỚP (CÓ PREVIEW TRỰC TIẾP) === -->
+    <div id="customMentorModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="w-full max-w-lg bg-slate-950 border border-slate-700/80 rounded-3xl p-5 sm:p-6 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">🎓</span>
+                    <h3 class="text-sm sm:text-base font-black text-amber-400">Thêm Giảng Viên / Mentor Lớp Mình</h3>
+                </div>
+                <button id="closeCustomModalBtn" class="text-slate-400 hover:text-white text-xl px-2 cursor-pointer">✕</button>
+            </div>
+
+            <form id="customMentorForm" class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Tên Thầy/Cô *</label>
+                    <input type="text" id="customMentorName" required placeholder="VD: Thầy Quang, Cô Linh..."
+                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Biệt danh / Vai trò</label>
+                        <input type="text" id="customMentorRole" placeholder="VD: Pháp Sư Spring Boot..."
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Tải ảnh Thầy/Cô lên</label>
+                        <input type="file" id="customMentorFile" accept="image/*"
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-slate-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-amber-500 file:text-black">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Sát thương Review Code</label>
+                        <input type="text" id="customMentorStat1" value="9999" placeholder="9999"
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Tốc độ bắt lỗi</label>
+                        <input type="text" id="customMentorStat2" value="Vô cực" placeholder="Vô cực"
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Câu nói bất hủ</label>
+                    <input type="text" id="customMentorQuote" placeholder="VD: “Bài này ai copy code là biết liền!”"
+                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Lời chúc 20/11 của lớp</label>
+                    <textarea id="customMentorWish" rows="2" placeholder="Kính chúc Thầy/Cô ngày 20/11 thật nhiều niềm vui, sức khỏe và luôn đồng hành cùng lớp..."
+                              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="document.getElementById('customMentorModal').classList.add('hidden')"
+                            class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-medium cursor-pointer">Hủy</button>
+                    <button type="submit"
+                            class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-black font-extrabold rounded-xl shadow-lg shadow-amber-500/30 cursor-pointer">
+                        Lưu & Đưa Vào Bể Thẻ SSR
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast thông báo -->
+    <div id="toast" class="hidden"></div>
+
+    <!-- Scripts nạp theo thứ tự: Data -> Audio -> App -->
+    <script src="data.js?v=2"></script>
+    <script src="audio.js?v=2"></script>
+    <script src="app.js?v=2"></script>
 </body>
 </html>

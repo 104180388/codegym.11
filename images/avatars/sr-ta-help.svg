@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+    <defs>
+        <radialGradient id="core_grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#3d0742"/>
+            <stop offset="100%" stop-color="#210324"/>
+        </radialGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <rect width="200" height="200" rx="30" fill="#080a12"/>
+    <rect x="4" y="4" width="192" height="192" rx="26" fill="none" stroke="#c026d3" stroke-width="2.5" opacity="0.75"/>
+    <g transform="translate(0, 35)">
+        
+            <circle cx="100" cy="65" r="46" fill="url(#core_grad)" stroke="#c026d3" stroke-width="2" filter="url(#glow)"/>
+            <ellipse cx="100" cy="65" rx="24" ry="20" fill="#3b0764" stroke="#e879f9" stroke-width="1.5"/>
+            <circle cx="92" cy="62" r="5.5" fill="#080a12" stroke="#38bdf8" stroke-width="1.5"/>
+            <circle cx="108" cy="62" r="5.5" fill="#080a12" stroke="#38bdf8" stroke-width="1.5"/>
+            <circle cx="92" cy="62" r="2.5" fill="#38bdf8" filter="url(#glow)"/>
+            <circle cx="108" cy="62" r="2.5" fill="#38bdf8" filter="url(#glow)"/>
+            <path d="M72 62 C72 44 128 44 128 62" fill="none" stroke="#f472b6" stroke-width="2"/>
+            <text x="100" y="98" font-family="'Segoe UI', monospace" font-size="8" font-weight="900" fill="#f5d0fe" text-anchor="middle">ONLINE 03:00 AM</text>
+        
+    </g>
+</svg>

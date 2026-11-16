@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 640" width="440" height="640">
+    <defs>
+        <linearGradient id="card_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#210505"/>
+            <stop offset="50%" stop-color="#330808"/>
+            <stop offset="100%" stop-color="#080a12"/>
+        </linearGradient>
+        <linearGradient id="theme_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#b91c1c"/>
+            <stop offset="100%" stop-color="#f87171"/>
+        </linearGradient>
+        <radialGradient id="core_grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#330808"/>
+            <stop offset="100%" stop-color="#210505"/>
+        </radialGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <pattern id="grid_pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        </pattern>
+    </defs>
+
+    <!-- Nền thẻ & Khung chính -->
+    <rect width="440" height="640" rx="26" fill="url(#card_bg)"/>
+    <rect width="440" height="640" rx="26" fill="url(#grid_pattern)"/>
+    <rect x="10" y="10" width="420" height="620" rx="22" fill="none" stroke="#b91c1c" stroke-width="3" filter="url(#glow)"/>
+    <rect x="16" y="16" width="408" height="608" rx="18" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+    <!-- 1. Thanh tiêu đề trên cùng (Top Bar) -->
+    <text x="28" y="42" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="900" fill="#b91c1c" letter-spacing="1.5">CODEGYM 20/11</text>
+    
+    <!-- Huy hiệu Rarity Pill Badge (Chữ 11.5px, căn giữa chuẩn, đệm lề 35px cực rộng rãi) -->
+    <rect x="216.8" y="22" width="195.2" height="28" rx="14" fill="url(#theme_grad)"/>
+    <text x="314.4" y="40.5" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="900" fill="#ffffff" text-anchor="middle">COMMON • CG-BUG-06</text>
+
+    <!-- 2. Khung Tên & Chức Danh (Chữ to 22.5px) -->
+    <text x="220" y="74" font-family="'Segoe UI', Roboto, sans-serif" font-size="22.5" font-weight="900" fill="#ffffff" text-anchor="middle">Deadline Đè Bẹp Dí ⚡</text>
+    <rect x="115.0" y="84" width="210.0" height="26" rx="13" fill="rgba(15, 23, 42, 0.85)" stroke="#b91c1c" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="220" y="102" font-family="'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="bold" fill="#f87171" text-anchor="middle">Kẻ Săn Đuổi Coder</text>
+
+    <!-- 3. Khung Đồ Họa Vector Trung Tâm (Art Viewport) -->
+    <rect x="30" y="116" width="380" height="130" rx="14" fill="#060912" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <g transform="translate(120, 114)">
+        
+            <circle cx="100" cy="65" r="46" fill="url(#core_grad)" stroke="#b91c1c" stroke-width="2" filter="url(#glow)"/>
+            <polygon points="82,44 118,44 100,66" fill="#7f1d1d" stroke="#f87171" stroke-width="1.5"/>
+            <polygon points="100,72 118,94 82,94" fill="#7f1d1d" stroke="#f87171" stroke-width="1.5"/>
+            <line x1="82" y1="44" x2="118" y2="44" stroke="#f87171" stroke-width="2.5"/>
+            <line x1="82" y1="94" x2="118" y2="94" stroke="#f87171" stroke-width="2.5"/>
+            <circle cx="100" cy="69" r="2.5" fill="#facc15" filter="url(#glow)"/>
+            <text x="100" y="104" font-family="'Segoe UI', monospace" font-size="7" font-weight="900" fill="#fca5a5" text-anchor="middle">TIME: 23:59:59</text>
+        
+    </g>
+
+    <!-- 4. Khung 4 Chỉ Số Lưới 2x2 (Chữ 16px số to, nhãn 12px đậm, cực rõ) -->
+    <g transform="translate(30, 254)">
+        <!-- Ô Chỉ Số 1 -->
+        <rect x="0" y="0" width="185" height="44" rx="9" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(255,255,255,0.08)"/>
+        <text x="14" y="18" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="bold" fill="#94a3b8">Thời gian còn</text>
+        <text x="14" y="37" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="900" fill="#b91c1c">00:03:15</text>
+
+        <!-- Ô Chỉ Số 2 -->
+        <rect x="195" y="0" width="185" height="44" rx="9" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(255,255,255,0.08)"/>
+        <text x="209" y="18" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="bold" fill="#94a3b8">Nhịp tim</text>
+        <text x="209" y="37" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="900" fill="#b91c1c">180 bpm</text>
+
+        <!-- Ô Chỉ Số 3 -->
+        <rect x="0" y="48" width="185" height="44" rx="9" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(255,255,255,0.08)"/>
+        <text x="14" y="66" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="bold" fill="#94a3b8">Nhập code</text>
+        <text x="14" y="85" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="900" fill="#b91c1c">Bằng bản năng</text>
+
+        <!-- Ô Chỉ Số 4 -->
+        <rect x="195" y="48" width="185" height="44" rx="9" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(255,255,255,0.08)"/>
+        <text x="209" y="66" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="bold" fill="#94a3b8">Lời cầu nguyện</text>
+        <text x="209" y="85" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="900" fill="#b91c1c">Mạng đừng lag</text>
+    </g>
+
+    <!-- 5. Khung Câu Nói Bất Hủ (Chữ 13px - 14px to rõ) -->
+    <rect x="30" y="354" width="380" height="52" rx="10" fill="rgba(10, 15, 26, 0.95)" stroke="rgba(255,255,255,0.08)"/>
+    <text x="220" y="375" font-family="'Segoe UI', Roboto, Georgia, serif" font-size="13" font-style="italic" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+            <tspan x="220" dy="0">“Nước đến chân mới nhảy là tầm thường, nước đến</tspan>
+            <tspan x="220" dy="19">cổ mới lặn!”</tspan>
+        </text>
+
+    <!-- 6. Khung Lời Chúc Tri Ân 20/11 (Chữ 13.5px đậm nét, màu trắng sáng tương phản cao) -->
+    <rect x="30" y="414" width="380" height="174" rx="12" fill="rgba(245, 158, 11, 0.08)" stroke="rgba(245, 158, 11, 0.35)" stroke-width="1.5"/>
+    <path d="M44 427 L50 433 L44 439" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text x="58" y="437" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="900" fill="#fbbf24" letter-spacing="1">💌 LỜI CHÚC TRI ÂN 20/11</text>
+    <line x1="44" y1="447" x2="396" y2="447" stroke="rgba(245, 158, 11, 0.2)" stroke-width="1"/>
+
+    <text x="46" y="472" font-family="'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="600" fill="#ffffff">
+        <tspan x="46" dy="0">Kính chúc quý thầy cô luôn an nhàn, thảnh</tspan><tspan x="46" dy="22">thơi, không bao giờ bị deadline dí như học</tspan><tspan x="46" dy="22">trò!</tspan>
+    </text>
+
+    <!-- 7. Footer Watermark & Serial -->
+    <line x1="30" y1="598" x2="410" y2="598" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <text x="220" y="618" font-family="monospace" font-size="11" font-weight="bold" fill="#64748b" text-anchor="middle" letter-spacing="1.5">✦ HỘI SĂN THẺ MENTOR SSR • CG-BUG-06 • CODEGYM 20/11 ✦</text>
+</svg>

@@ -1,0 +1,448 @@
+/* === CSS TỐI ƯU TOÀN DIỆN: LAYOUT, KHUNG CHỮ & ĐỒ HỌA 20/11 CODEGYM === */
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap');
+
+:root {
+    --card-width: 154px;
+    --card-height: 216px;
+    --card-gap: 12px;
+    --gold-primary: #f59e0b;
+    --gold-glow: rgba(245, 158, 11, 0.5);
+    --purple-primary: #a855f7;
+    --blue-primary: #3b82f6;
+    --red-primary: #ef4444;
+    --dark-bg: #070a12;
+    --surface-bg: #0d1322;
+    --surface-card: #0f172a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--dark-bg);
+    color: #f1f5f9;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.font-gaming {
+    font-family: 'Orbitron', 'Be Vietnam Pro', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+/* === NỀN CYBERPUNK GRID HOÀN MỸ === */
+.cyber-grid-bg {
+    background-color: var(--dark-bg);
+    background-image: 
+        radial-gradient(circle at 50% 12%, rgba(245, 158, 11, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 15% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+}
+
+/* === HEADER NAVBAR === */
+.navbar-container {
+    background: rgba(7, 10, 18, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* === KHUNG HÒM ROULETTE (CRATE VIEWPORT) === */
+.crate-shell {
+    background: linear-gradient(180deg, rgba(13, 19, 34, 0.95) 0%, rgba(7, 10, 18, 0.98) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 16px;
+    position: relative;
+}
+
+.roulette-viewport {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: #04070e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+}
+
+/* Kim hồng tâm Laser Reticle */
+.roulette-needle {
+    position: absolute;
+    top: -6px;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    background: linear-gradient(180deg, #f59e0b 0%, #fef08a 50%, #f59e0b 100%);
+    box-shadow: 0 0 14px rgba(245, 158, 11, 0.9), 0 0 30px rgba(245, 158, 11, 0.6);
+    z-index: 30;
+    pointer-events: none;
+}
+
+.roulette-needle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 15px solid #fbbf24;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
+}
+
+.roulette-needle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 15px solid #fbbf24;
+    filter: drop-shadow(0 -2px 5px rgba(0,0,0,0.8));
+}
+
+/* Lớp phủ mờ dần mép trái & phải */
+.roulette-vignette-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 120px;
+    background: linear-gradient(90deg, #04070e 0%, rgba(4, 7, 14, 0.95) 40%, transparent 100%);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.roulette-vignette-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    background: linear-gradient(270deg, #04070e 0%, rgba(4, 7, 14, 0.95) 40%, transparent 100%);
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* === THẺ BÀI TRÊN BĂNG CHUYỀN ROULETTE === */
+.roulette-card {
+    width: var(--card-width);
+    height: var(--card-height);
+    flex-shrink: 0;
+    user-select: none;
+    border-radius: 16px;
+    padding: 10px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.roulette-card .card-badge {
+    position: relative;
+    z-index: 2;
+    font-size: 10.5px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.roulette-card .card-avatar-box {
+    position: relative;
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 6px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.roulette-card .card-avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.roulette-card .card-title-box {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.roulette-card .card-name {
+    font-size: 12px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 32px;
+}
+
+.roulette-card .card-role {
+    font-size: 10px;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+}
+
+/* Viền phát sáng theo độ hiếm */
+.card-ssr {
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.4), inset 0 0 12px rgba(245, 158, 11, 0.15);
+}
+
+.card-ssr::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #fbbf24, #d97706, #fef08a, #b45309);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: goldGlow 3s linear infinite;
+}
+
+@keyframes goldGlow {
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(15deg) brightness(1.25); }
+    100% { filter: hue-rotate(0deg) brightness(1); }
+}
+
+.card-sr {
+    border-color: #a855f7 !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+}
+
+.card-r {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+}
+
+.card-common {
+    border-color: rgba(239, 68, 68, 0.5) !important;
+}
+
+/* === NÚT BẤM GAMING (TACTILE PUSH BUTTONS) === */
+.btn-spin-gold {
+    position: relative;
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+    color: #000000;
+    font-weight: 900;
+    border: none;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45), 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn-spin-gold:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.65), 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.btn-spin-gold:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+}
+
+.btn-spin-purple {
+    position: relative;
+    background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
+    color: #ffffff;
+    font-weight: 900;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 20px rgba(147, 51, 234, 0.35), 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn-spin-purple:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(147, 51, 234, 0.55), 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.btn-spin-purple:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(147, 51, 234, 0.25);
+}
+
+/* === THANH PITY BAR (THƯỚC ĐO NHÂN PHẨM) === */
+.pity-gauge-container {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 10px 14px;
+}
+
+.pity-track {
+    width: 100%;
+    height: 8px;
+    background: #1e293b;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pity-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+    border-radius: 4px;
+    transition: width 0.4s ease-out;
+}
+
+/* === MODAL WINNER & THẺ BÀI COLLECTIBLE === */
+.winner-dialog-content {
+    background: #080c14;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(245, 158, 11, 0.15);
+    border-radius: 28px;
+    max-height: 94vh;
+    overflow-y: auto;
+}
+
+/* Khung ảnh thẻ bài 3D Tilt */
+.card-presentation-frame {
+    perspective: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-3d-img {
+    width: 100%;
+    max-width: 380px;
+    max-height: 80vh;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+    transform-style: preserve-3d;
+}
+
+/* Hiệu ứng hào quang vàng rực khi trúng SSR */
+@keyframes winnerGoldAura {
+    0%, 100% {
+        filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.45));
+    }
+    50% {
+        filter: drop-shadow(0 0 35px rgba(245, 158, 11, 0.85)) drop-shadow(0 0 8px #fef08a);
+    }
+}
+
+.ssr-glow-active {
+    animation: winnerGoldAura 2.2s infinite ease-in-out;
+}
+
+/* === GALLERY THƯ VIỆN ẢNH THẺ === */
+.gallery-card-item {
+    background: #0d1322;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 10px;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gallery-card-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245, 158, 11, 0.6);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.gallery-card-thumb {
+    width: 100%;
+    aspect-ratio: 440 / 640;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #050811;
+    cursor: pointer;
+}
+
+.gallery-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-card-thumb:hover img {
+    transform: scale(1.03);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #070a12;
+}
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    :root {
+        --card-width: 138px;
+        --card-height: 196px;
+    }
+    .roulette-viewport {
+        height: 220px;
+    }
+    .card-3d-img {
+        max-width: 320px;
+        max-height: 75vh;
+    }
+}

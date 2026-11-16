@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240">
+    <defs>
+        <linearGradient id="crate_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24"/>
+            <stop offset="50%" stop-color="#d97706"/>
+            <stop offset="100%" stop-color="#78350f"/>
+        </linearGradient>
+        <linearGradient id="metal_dark" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#090d16"/>
+        </linearGradient>
+        <filter id="crate_glow">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <!-- Base Crate Body -->
+    <rect x="40" y="70" width="220" height="135" rx="14" fill="url(#metal_dark)" stroke="#fbbf24" stroke-width="3" filter="url(#crate_glow)"/>
+    <!-- Diagonal Hazard Bars -->
+    <path d="M50 85 L75 85 L50 110 Z M85 85 L110 85 L60 135 L50 135 Z M120 85 L145 85 L70 160 L50 160 Z" fill="#d97706" opacity="0.3"/>
+    <!-- Crate Lid -->
+    <rect x="30" y="45" width="240" height="35" rx="8" fill="url(#crate_gold)" stroke="#fef08a" stroke-width="2"/>
+    <!-- Cyber Lock Core -->
+    <rect x="120" y="60" width="60" height="50" rx="8" fill="#0f172a" stroke="#fbbf24" stroke-width="2.5"/>
+    <circle cx="150" cy="85" r="14" fill="#fbbf24" filter="url(#crate_glow)"/>
+    <circle cx="150" cy="85" r="6" fill="#090d16"/>
+    <!-- Emblems & Rivets -->
+    <circle cx="50" cy="90" r="4" fill="#fbbf24"/>
+    <circle cx="250" cy="90" r="4" fill="#fbbf24"/>
+    <circle cx="50" cy="185" r="4" fill="#fbbf24"/>
+    <circle cx="250" cy="185" r="4" fill="#fbbf24"/>
+    <text x="150" y="145" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="900" fill="#fef08a" text-anchor="middle" letter-spacing="2">CODEGYM #2011</text>
+    <text x="150" y="165" font-family="monospace" font-size="10" font-weight="bold" fill="#94a3b8" text-anchor="middle">SSR DROP CHANCE 8%</text>
+</svg>

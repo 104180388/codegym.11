@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+    <defs>
+        <radialGradient id="core_grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#330808"/>
+            <stop offset="100%" stop-color="#210505"/>
+        </radialGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <rect width="200" height="200" rx="30" fill="#080a12"/>
+    <rect x="4" y="4" width="192" height="192" rx="26" fill="none" stroke="#991b1b" stroke-width="2.5" opacity="0.75"/>
+    <g transform="translate(0, 35)">
+        
+            <circle cx="100" cy="65" r="46" fill="url(#core_grad)" stroke="#991b1b" stroke-width="2" filter="url(#glow)"/>
+            <path d="M82 59 C82 45 118 45 118 59 C118 69 112 74 112 80 L88 80 C88 74 82 69 82 59 Z" fill="#450a0a" stroke="#f87171" stroke-width="2"/>
+            <circle cx="91" cy="61" r="3.5" fill="#080a12"/>
+            <circle cx="109" cy="61" r="3.5" fill="#080a12"/>
+            <text x="100" y="52" font-family="'Segoe UI', monospace" font-size="7.5" font-weight="900" fill="#fca5a5" text-anchor="middle">null.pointer</text>
+            <text x="100" y="99" font-family="'Segoe UI', monospace" font-size="8" font-weight="900" fill="#ef4444" text-anchor="middle">CRASHED AT LINE 0</text>
+        
+    </g>
+</svg>

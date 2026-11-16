@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+    <defs>
+        <radialGradient id="core_grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1d0e42"/>
+            <stop offset="100%" stop-color="#100829"/>
+        </radialGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <rect width="200" height="200" rx="30" fill="#080a12"/>
+    <rect x="4" y="4" width="192" height="192" rx="26" fill="none" stroke="#6366f1" stroke-width="2.5" opacity="0.75"/>
+    <g transform="translate(0, 35)">
+        
+            <circle cx="100" cy="65" r="46" fill="url(#core_grad)" stroke="#6366f1" stroke-width="2" filter="url(#glow)"/>
+            <line x1="82" y1="43" x2="82" y2="89" stroke="#818cf8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="82" cy="50" r="4" fill="#6366f1" stroke="#e0e7ff" stroke-width="1.5"/>
+            <circle cx="82" cy="82" r="4" fill="#6366f1" stroke="#e0e7ff" stroke-width="1.5"/>
+            <path d="M82 72 C96 72 110 65 110 55 L110 43" fill="none" stroke="#f43f5e" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="110" cy="43" r="4" fill="#f43f5e" stroke="#ffe4e6" stroke-width="1.5"/>
+            <text x="100" y="103" font-family="'Segoe UI', monospace" font-size="8" font-weight="900" fill="#c7d2fe" text-anchor="middle">MERGE WITHOUT CHECK</text>
+        
+    </g>
+</svg>
